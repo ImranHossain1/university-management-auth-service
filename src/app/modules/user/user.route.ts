@@ -6,22 +6,22 @@ const router = express.Router();
 
 router.post(
   '/create-student',
-  validateRequest(UserValidation.createUserZodSchema),
+  validateRequest(UserValidation.createStudentZodSchema),
   UserController.createStudent
 );
 
 // create faculty
-/* router.post(
+router.post(
   '/create-faculty',
-  validateRequest(UserValidation.createUserZodSchema),
+  validateRequest(UserValidation.createFacultyZodSchema),
   UserController.createStudent
 );
 
 // create admin
 router.post(
   '/create-admin',
-  validateRequest(UserValidation.createUserZodSchema),
+  validateRequest(UserValidation.createAdminZodSchema),
   UserController.createStudent
-); */
+);
 
 export const UserRoutes = router;
