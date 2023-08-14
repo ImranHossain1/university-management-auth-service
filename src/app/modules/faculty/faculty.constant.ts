@@ -1,16 +1,14 @@
+//for exact match
 export const facultyFilterableFields = [
   'searchTerm',
   'id',
-  'gender',
   'bloodGroup',
   'email',
   'contactNo',
   'emergencyContactNo',
-  'academicFaculty',
-  'academicDepartment',
   'designation',
 ];
-
+// it will match partially
 export const facultySearchableFields = [
   'email',
   'contactNo',
