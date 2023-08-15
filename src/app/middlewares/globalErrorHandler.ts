@@ -1,16 +1,17 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-unused-expressions */
 /* eslint-disable no-console */
+/* eslint-disable no-unused-expressions */
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import config from '../../config';
-import { IGenericErrorMessage } from '../../interfaces/error';
-import handleValidationError from '../../errors/handleValidationError';
 import ApiError from '../../errors/ApiError';
-import { errorLogger } from '../../shared/logger';
+import handleValidationError from '../../errors/handleValidationError';
+
 import { ZodError } from 'zod';
-import handleZodError from '../../errors/handleZodError';
 import handleCastError from '../../errors/handleCastError';
-// eslint-disable-next-line no-unused-vars
+import handleZodError from '../../errors/handleZodError';
+import { IGenericErrorMessage } from '../../interfaces/error';
+import { errorlogger } from '../../shared/logger';
+
 const globalErrorHandler: ErrorRequestHandler = (
   error,
   req: Request,
@@ -18,10 +19,11 @@ const globalErrorHandler: ErrorRequestHandler = (
   next: NextFunction
 ) => {
   config.env === 'development'
-    ? console.log('globalErrorHandler ~', error)
-    : console.log('globalErrorHandler ~', error);
+    ? console.log(`🐱‍🏍 globalErrorHandler ~~`, { error })
+    : errorlogger.error(`🐱‍🏍 globalErrorHandler ~~`, error);
+
   let statusCode = 500;
-  let message = 'Something went wrong!';
+  let message = 'Something went wrong !';
   let errorMessages: IGenericErrorMessage[] = [];
 
   if (error?.name === 'ValidationError') {
@@ -41,7 +43,7 @@ const globalErrorHandler: ErrorRequestHandler = (
     errorMessages = simplifiedError.errorMessages;
   } else if (error instanceof ApiError) {
     statusCode = error?.statusCode;
-    message = error?.message;
+    message = error.message;
     errorMessages = error?.message
       ? [
           {
@@ -61,6 +63,7 @@ const globalErrorHandler: ErrorRequestHandler = (
         ]
       : [];
   }
+
   res.status(statusCode).json({
     success: false,
     message,
@@ -70,3 +73,10 @@ const globalErrorHandler: ErrorRequestHandler = (
 };
 
 export default globalErrorHandler;
+
+//path:
+//message:
+
+// 2025 Fall
+
+// 2025 and
