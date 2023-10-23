@@ -1,0 +1,12 @@
+Sun Oct 22 2023 23:7:29 } [PH] error: Failed to connect database initAcademicEvents is not defined
+Sun Oct 22 2023 23:7:34 } [PH] error: Failed to connect database initAcademicDepaEvents is not defined
+Sun Oct 22 2023 23:7:36 } [PH] error: Failed to connect database initAcademicDepartmentEvents is not defined
+Sun Oct 22 2023 23:8:5 } [PH] error: AcademicDepartment validation failed: academicFaculty: Path `academicFaculty` is required.
+Sun Oct 22 2023 23:9:52 } [PH] error: AcademicDepartment validation failed: academicFacultyId: Cast to ObjectId failed for value "ac00744d-023b-4dd2-8173-741944575658" (type string) at path "academicFacultyId" because of "BSONError"
+Sun Oct 22 2023 23:43:38 } [PH] error: AcademicDepartment validation failed: academicFaculty: Path `academicFaculty` is required.
+Sun Oct 22 2023 23:44:31 } [PH] error: AcademicDepartment validation failed: academicFaculty: Path `academicFaculty` is required.
+Sun Oct 22 2023 23:47:36 } [PH] error: E11000 duplicate key error collection: university-mnagement.academicfaculties index: title_1 dup key: { title: "Department of Scient and Technology" }
+Sun Oct 22 2023 23:49:3 } [PH] error: AcademicDepartment validation failed: academicFaculty: Path `academicFaculty` is required.
+Sun Oct 22 2023 23:52:57 } [PH] error: AcademicDepartment validation failed: academicFacultyId: Path `academicFacultyId` is required.
+Sun Oct 22 2023 23:53:13 } [PH] error: AcademicDepartment validation failed: academicFacultyId: Path `academicFacultyId` is required.
+Sun Oct 22 2023 23:54:5 } [PH] error: AcademicDepartment validation failed: academicFacultyId: Path `academicFacultyId` is required.
