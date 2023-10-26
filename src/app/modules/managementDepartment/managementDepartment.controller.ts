@@ -9,10 +9,9 @@ import { IManagementDepartment } from './managementDepartment.inerface';
 import { ManagementDepartmentService } from './managementDepartment.service';
 
 const createDepartment = catchAsync(async (req: Request, res: Response) => {
-  const { ...departmentData } = req.body;
-  const result = await ManagementDepartmentService.createDepartment(
-    departmentData
-  );
+  //const { ...departmentData } = req.body;
+
+  const result = await ManagementDepartmentService.createDepartment(req.body);
 
   sendResponse<IManagementDepartment>(res, {
     statusCode: httpStatus.OK,

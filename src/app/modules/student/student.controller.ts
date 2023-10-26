@@ -40,6 +40,7 @@ const getSingleStudent = catchAsync(async (req: Request, res: Response) => {
 
 const updateStudent = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
+
   const updatedData = req.body;
   const result = await StudentService.updatedStudent(id, updatedData);
   sendResponse<IStudent>(res, {

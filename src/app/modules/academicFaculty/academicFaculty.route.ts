@@ -15,16 +15,7 @@ router.post(
   AcademicFacultyController.createFaculty
 );
 
-router.get(
-  '/:id',
-  auth(
-    ENUM_USER_ROLE.SUPER_ADMIN,
-    ENUM_USER_ROLE.ADMIN,
-    ENUM_USER_ROLE.FACULTY,
-    ENUM_USER_ROLE.STUDENT
-  ),
-  AcademicFacultyController.getSingleFaculty
-);
+router.get('/:id', AcademicFacultyController.getSingleFaculty);
 
 router.patch(
   '/:id',
@@ -43,14 +34,6 @@ router.delete(
   AcademicFacultyController.deleteFaculty
 );
 
-router.get(
-  '/',
-  auth(
-    ENUM_USER_ROLE.SUPER_ADMIN,
-    ENUM_USER_ROLE.ADMIN,
-    ENUM_USER_ROLE.FACULTY
-  ),
-  AcademicFacultyController.getAllFaculties
-);
+router.get('/', AcademicFacultyController.getAllFaculties);
 
 export const AcademicFacultyRoutes = router;
