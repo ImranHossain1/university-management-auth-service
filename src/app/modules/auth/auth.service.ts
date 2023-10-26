@@ -89,36 +89,50 @@ const changePassword = async (
 };
 
 const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
-  // verify token
+  //verify token
+  // invalid token - synchronous
   let verifiedToken = null;
   try {
     verifiedToken = jwtHelpers.verifyToken(
       token,
       config.jwt.refresh_secret as Secret
     );
-    //
   } catch (err) {
-    // err
-    throw new ApiError(httpStatus.FORBIDDEN, 'invalid refresh token');
+    throw new ApiError(httpStatus.FORBIDDEN, 'Invalid Refresh Token');
   }
-  //checking deleted user's refresh token
+
   const { userId } = verifiedToken;
+
+  // tumi delete hye gso  kintu tumar refresh token ase
+  // checking deleted user's refresh token
+
   const isUserExist = await User.isUserExist(userId);
   if (!isUserExist) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'User does not exists');
+    throw new ApiError(httpStatus.NOT_FOUND, 'User does not exist');
   }
   //generate new token
+
   const newAccessToken = jwtHelpers.createToken(
     {
-      id: isUserExist.id,
+      userId: isUserExist.id,
       role: isUserExist.role,
     },
     config.jwt.secret as Secret,
     config.jwt.expires_in as string
   );
 
+  const newRefreshToken = jwtHelpers.createToken(
+    {
+      userId: isUserExist.id,
+      role: isUserExist.role,
+    },
+    config.jwt.refresh_secret as Secret,
+    config.jwt.refresh_expires_in as string
+  );
+
   return {
     accessToken: newAccessToken,
+    refreshToken: newRefreshToken,
   };
 };
 export const AuthService = {

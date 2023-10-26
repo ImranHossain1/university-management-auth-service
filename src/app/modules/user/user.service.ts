@@ -16,6 +16,12 @@ import { IAdmin } from '../admin/admin.interface';
 import { IFaculty } from '../faculty/faculty.interface';
 import { Faculty } from '../faculty/faculty.model';
 import { Admin } from '../admin/admin.model';
+import { RedisClient } from '../../../shared/redis';
+import {
+  EVENT_ADMIN_CREATED,
+  EVENT_FACULTY_CREATED,
+  EVENT_STUDENT_CREATED,
+} from './user.constant';
 
 const createStudent = async (
   student: IStudent,
@@ -81,6 +87,13 @@ const createStudent = async (
       ],
     });
   }
+
+  if (newUserAllData) {
+    await RedisClient.publish(
+      EVENT_STUDENT_CREATED,
+      JSON.stringify(newUserAllData.student)
+    );
+  }
   return newUserAllData;
 };
 const createFaculty = async (
@@ -141,7 +154,12 @@ const createFaculty = async (
       ],
     });
   }
-
+  if (newUserAllData) {
+    await RedisClient.publish(
+      EVENT_FACULTY_CREATED,
+      JSON.stringify(newUserAllData.faculty)
+    );
+  }
   return newUserAllData;
 };
 
@@ -199,7 +217,12 @@ const createAdmin = async (
       ],
     });
   }
-
+  if (newUserAllData) {
+    await RedisClient.publish(
+      EVENT_ADMIN_CREATED,
+      JSON.stringify(newUserAllData.admin)
+    );
+  }
   return newUserAllData;
 };
 

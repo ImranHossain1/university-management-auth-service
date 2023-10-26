@@ -25,7 +25,7 @@ const getSingleDepartment = async (
   id: string
 ): Promise<IAcademicDepartment | null> => {
   const result = await AcademicDepartment.findById(id).populate(
-    'academicFaculty'
+    'academicFacultyId'
   );
 
   return result;
@@ -75,7 +75,7 @@ const getAllDepartments = async (
     andConditions.length > 0 ? { $and: andConditions } : {};
 
   const result = await AcademicDepartment.find(whereConditions)
-    .populate('academicFaculty')
+    .populate('academicFacultyId')
     .sort(sortConditions)
     .skip(skip)
     .limit(limit);
@@ -120,7 +120,6 @@ const insertIntoDBFromEvent = async (
   const academicFaculty = await AcademicFaculty.findOne({
     syncId: e.academicFacultyId,
   });
-  console.log(academicFaculty);
   const payload = {
     title: e.title,
     academicFacultyId: academicFaculty?._id,

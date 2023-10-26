@@ -10,7 +10,7 @@ import { ILoginUserResponse, IRefreshTokenResponse } from './auth.interface';
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const { ...loginData } = req.body;
   const result = await AuthService.loginUser(loginData);
-  const { refreshToken, ...others } = result;
+  const { refreshToken } = result;
   //set refresh token into cookie
   const cookieOptions = {
     secure: config.env === 'production',
@@ -18,15 +18,11 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   };
   res.cookie('refreshToken', refreshToken, cookieOptions);
 
-  /* if ('refreshToken' in result) {
-    delete result.refreshToken;
-  } */
-
   sendResponse<ILoginUserResponse>(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'User logged in Successfully',
-    data: others,
+    data: result,
   });
 });
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
@@ -38,7 +34,7 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
     secure: config.env === 'production',
     httpOnly: true,
   };
-  res.cookie('refreshToken', refreshToken, cookieOptions);
+  res.cookie('refreshToken', result.refreshToken, cookieOptions);
 
   /* if ('refreshToken' in result) {
     delete result.refreshToken;

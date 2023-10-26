@@ -103,11 +103,10 @@ const deleteByIdFromDB = async (
 const insertIntoDBFromEvent = async (
   e: AcademicFacultyCreatedEvent
 ): Promise<void> => {
-  const result = await AcademicFaculty.create({
+  await AcademicFaculty.create({
     syncId: e.id,
     title: e.title,
   });
-  console.log(result);
 };
 
 const updateOneInDBFromEvent = async (
