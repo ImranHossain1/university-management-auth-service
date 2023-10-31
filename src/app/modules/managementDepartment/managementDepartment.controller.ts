@@ -59,7 +59,6 @@ const updateDepartment = catchAsync(
       id,
       updatedData
     );
-
     sendResponse<IManagementDepartment>(res, {
       statusCode: httpStatus.OK,
       success: true,
